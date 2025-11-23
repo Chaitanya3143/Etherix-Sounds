@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <title>Etherix Sounds - Premium Wireless Headphones</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">ETHERIX</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#showcase">Premium</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Search products...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                <button class="icon-btn" id="cartBtn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </button>
+                <div style="position: relative;">
+                    <button class="icon-btn user-btn" id="userBtn">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <div class="user-menu" id="userMenu">
+                        <div class="user-info" id="userInfo" style="display: none;">
+                            <h4 id="userName">John Doe</h4>
+                            <p id="userEmail">john@example.com</p>
+                        </div>
+                        <div id="guestMenu">
+                            <div class="user-menu-item" onclick="openAuthModal()">
+                                <i class="fas fa-sign-in-alt"></i>
+                                <span>Sign In</span>
+                            </div>
+                        </div>
+                        <div id="loggedInMenu" style="display: none;">
+                            <a href="#" class="user-menu-item" onclick="showProfile(); return false;">
+                                <i class="fas fa-user-circle"></i>
+                                <span>My Profile</span>
+                            </a>
+                            <a href="#" class="user-menu-item" onclick="showProfile('orders'); return false;">
+                                <i class="fas fa-box"></i>
+                                <span>Orders</span>
+                            </a>
+                            <a href="#" class="user-menu-item" onclick="showProfile('wishlist'); return false;">
+                                <i class="fas fa-heart"></i>
+                                <span>Wishlist</span>
+                            </a>
+                            <a href="#" class="user-menu-item" onclick="showProfile('settings'); return false;">
+                                <i class="fas fa-cog"></i>
+                                <span>Settings</span>
+                            </a>
+                            <div class="user-menu-item" onclick="handleLogout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Experience Sound Like Never Before</h1>
+                <p>Premium wireless headphones with active noise cancellation, studio-quality audio, and all-day comfort.</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary">Shop Now</button>
+                    <button class="btn-secondary">Learn More</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="home_hero_banner.png" alt="Etherix Headphones"/>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section class="profile-section" id="profileSection">
+        <div class="profile-container">
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <div class="profile-header-content">
+                    <div class="profile-avatar-large" id="profileAvatar">
+                        <span id="avatarInitials">JD</span>
+                        <div class="avatar-edit-btn">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                    </div>
+                    <div class="profile-header-info">
+                        <h1 id="profileName">John Doe</h1>
+                        <p id="profileEmail">john@example.com</p>
+                        <div class="profile-stats">
+                            <div class="profile-stat">
+                                <div class="profile-stat-value">12</div>
+                                <div class="profile-stat-label">Orders</div>
+                            </div>
+                            <div class="profile-stat">
+                                <div class="profile-stat-value">5</div>
+                                <div class="profile-stat-label">Wishlist</div>
+                            </div>
+                            <div class="profile-stat">
+                                <div class="profile-stat-value">$2,450</div>
+                                <div class="profile-stat-label">Total Spent</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-content">
+                <!-- Sidebar Navigation -->
+                <div class="profile-sidebar">
+                    <div class="profile-nav-item active" onclick="switchProfileTab('info')">
+                        <i class="fas fa-user"></i>
+                        <span>Personal Info</span>
+                    </div>
+                    <div class="profile-nav-item" onclick="switchProfileTab('orders')">
+                        <i class="fas fa-box"></i>
+                        <span>My Orders</span>
+                    </div>
+                    <div class="profile-nav-item" onclick="switchProfileTab('wishlist')">
+                        <i class="fas fa-heart"></i>
+                        <span>Wishlist</span>
+                    </div>
+                    <div class="profile-nav-item" onclick="switchProfileTab('addresses')">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Addresses</span>
+                    </div>
+                    <div class="profile-nav-item" onclick="switchProfileTab('settings')">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </div>
+                    <div class="profile-nav-item" onclick="showHome()">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Back to Home</span>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="profile-main">
+                    <!-- Personal Info Tab -->
+                    <div class="profile-tab-content active" id="infoTab">
+                        <h2 class="profile-section-title">Personal Information</h2>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <div class="info-item-label">Full Name</div>
+                                <div class="info-item-value">
+                                    <span>John Doe</span>
+                                    <button class="edit-btn-small"><i class="fas fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-item-label">Email Address</div>
+                                <div class="info-item-value">
+                                    <span>john@example.com</span>
+                                    <button class="edit-btn-small"><i class="fas fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-item-label">Phone Number</div>
+                                <div class="info-item-value">
+                                    <span>+1 (555) 123-4567</span>
+                                    <button class="edit-btn-small"><i class="fas fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-item-label">Date of Birth</div>
+                                <div class="info-item-value">
+                                    <span>January 15, 1990</span>
+                                    <button class="edit-btn-small"><i class="fas fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-item-label">Gender</div>
+                                <div class="info-item-value">
+                                    <span>Male</span>
+                                    <button class="edit-btn-small"><i class="fas fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-item-label">Member Since</div>
+                                <div class="info-item-value">
+                                    <span>November 2024</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Orders Tab -->
+                    <div class="profile-tab-content" id="ordersTab">
+                        <h2 class="profile-section-title">My Orders</h2>
+                        
+                        <div class="order-card">
+                            <div class="order-header">
+                                <div>
+                                    <div class="order-id">Order #ETH-2024-001</div>
+                                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Placed on Nov 10, 2024</p>
+                                </div>
+                                <span class="order-status delivered">Delivered</span>
+                            </div>
+                            <div class="order-items">
+                                <div class="order-item-image">
+                                    <img src="etherix_elite_pro.png" alt="Product">
+                                </div>
+                                <div class="order-item-info">
+                                    <h4>Etherix Elite Pro</h4>
+                                    <p>Quantity: 1</p>
+                                </div>
+                            </div>
+                            <div class="order-footer">
+                                <div class="order-total">$349.99</div>
+                                <div class="order-actions">
+                                    <button class="btn-small">Track Order</button>
+                                    <button class="btn-small">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="order-card">
+                            <div class="order-header">
+                                <div>
+                                    <div class="order-id">Order #ETH-2024-002</div>
+                                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Placed on Nov 15, 2024</p>
+                                </div>
+                                <span class="order-status shipped">Shipped</span>
+                            </div>
+                            <div class="order-items">
+                                <div class="order-item-image">
+                                    <img src="etherix_bass_max.png" alt="Product">
+                                </div>
+                                <div class="order-item-info">
+                                    <h4>Etherix Bass Max</h4>
+                                    <p>Quantity: 1</p>
+                                </div>
+                            </div>
+                            <div class="order-footer">
+                                <div class="order-total">$279.99</div>
+                                <div class="order-actions">
+                                    <button class="btn-small">Track Order</button>
+                                    <button class="btn-small">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="order-card">
+                            <div class="order-header">
+                                <div>
+                                    <div class="order-id">Order #ETH-2024-003</div>
+                                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Placed on Nov 18, 2024</p>
+                                </div>
+                                <span class="order-status processing">Processing</span>
+                            </div>
+                            <div class="order-items">
+                                <div class="order-item-image">
+                                    <img src="etherix_sport_s3.png" alt="Product">
+                                </div>
+                                <div class="order-item-info">
+                                    <h4>Etherix Sport S3</h4>
+                                    <p>Quantity: 2</p>
+                                </div>
+                            </div>
+                            <div class="order-footer">
+                                <div class="order-total">$499.98</div>
+                                <div class="order-actions">
+                                    <button class="btn-small">Cancel Order</button>
+                                    <button class="btn-small">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wishlist Tab -->
+                    <div class="profile-tab-content" id="wishlistTab">
+                        <h2 class="profile-section-title">My Wishlist</h2>
+                        <div class="wishlist-grid">
+                            <div class="wishlist-item">
+                                <button class="wishlist-remove"><i class="fas fa-times"></i></button>
+                                <div class="wishlist-image">
+                                    <img src="etherix_gaming_x.png" alt="Product">
+                                </div>
+                                <div class="wishlist-info">
+                                    <h4>Etherix Gaming X</h4>
+                                    <div class="wishlist-price">$229.99</div>
+                                    <button class="btn-primary" style="width: 100%;">Add to Cart</button>
+                                </div>
+                            </div>
+
+                            <div class="wishlist-item">
+                                <button class="wishlist-remove"><i class="fas fa-times"></i></button>
+                                <div class="wishlist-image">
+                                    <img src="etherix_studio_hd.png" alt="Product">
+                                </div>
+                                <div class="wishlist-info">
+                                    <h4>Etherix Studio HD</h4>
+                                    <div class="wishlist-price">$199.99</div>
+                                    <button class="btn-primary" style="width: 100%;">Add to Cart</button>
+                                </div>
+                            </div>
+
+                            <div class="wishlist-item">
+                                <button class="wishlist-remove"><i class="fas fa-times"></i></button>
+                                <div class="wishlist-image">
+                                    <img src="etherix_comfort_plus.png" alt="Product">
+                                </div>
+                                <div class="wishlist-info">
+                                    <h4>Etherix Comfort Plus</h4>
+                                    <div class="wishlist-price">$259.99</div>
+                                    <button class="btn-primary" style="width: 100%;">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Addresses Tab -->
+                    <div class="profile-tab-content" id="addressesTab">
+                        <h2 class="profile-section-title">Saved Addresses</h2>
+                        
+                        <div class="address-card default">
+                            <span class="address-badge">Default</span>
+                            <div class="address-header">
+                                <div class="address-type"><i class="fas fa-home"></i> Home</div>
+                            </div>
+                            <div class="address-details">
+                                John Doe<br>
+                                123 Main Street, Apt 4B<br>
+                                New York, NY 10001<br>
+                                United States<br>
+                                Phone: +1 (555) 123-4567
+                            </div>
+                            <div class="address-actions">
+                                <button class="btn-small">Edit</button>
+                                <button class="btn-small">Remove</button>
+                            </div>
+                        </div>
+
+                        <div class="address-card">
+                            <div class="address-header">
+                                <div class="address-type"><i class="fas fa-briefcase"></i> Work</div>
+                            </div>
+                            <div class="address-details">
+                                John Doe<br>
+                                456 Business Ave, Suite 100<br>
+                                New York, NY 10002<br>
+                                United States<br>
+                                Phone: +1 (555) 987-6543
+                            </div>
+                            <div class="address-actions">
+                                <button class="btn-small">Set as Default</button>
+                                <button class="btn-small">Edit</button>
+                                <button class="btn-small">Remove</button>
+                            </div>
+                        </div>
+
+                        <button class="btn-primary" style="margin-top: 1rem;">
+                            <i class="fas fa-plus"></i> Add New Address
+                        </button>
+                    </div>
+
+                    <!-- Settings Tab -->
+                    <div class="profile-tab-content" id="settingsTab">
+                        <h2 class="profile-section-title">Account Settings</h2>
+                        
+                        <div class="settings-section">
+                            <h3>Notifications</h3>
+                            <div class="toggle-switch">
+                                <div class="toggle-label">
+                                    <h4>Email Notifications</h4>
+                                    <p>Receive updates about orders and promotions</p>
+                                </div>
+                                <label class="toggle-input">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-switch">
+                                <div class="toggle-label">
+                                    <h4>SMS Notifications</h4>
+                                    <p>Get text messages for order updates</p>
+                                </div>
+                                <label class="toggle-input">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-switch">
+                                <div class="toggle-label">
+                                    <h4>Push Notifications</h4>
+                                    <p>Receive push notifications on your device</p>
+                                </div>
+                                <label class="toggle-input">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <h3>Privacy</h3>
+                            <div class="toggle-switch">
+                                <div class="toggle-label">
+                                    <h4>Profile Visibility</h4>
+                                    <p>Make your profile visible to other users</p>
+                                </div>
+                                <label class="toggle-input">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-switch">
+                                <div class="toggle-label">
+                                    <h4>Show Purchase History</h4>
+                                    <p>Allow others to see your reviews and purchases</p>
+                                </div>
+                                <label class="toggle-input">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <h3>Security</h3>
+                            <button class="btn-primary" style="margin-right: 1rem;">Change Password</button>
+                            <button class="btn-primary">Enable Two-Factor Authentication</button>
+                        </div>
+
+                        <div class="settings-section">
+                            <h3>Danger Zone</h3>
+                            <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                                Once you delete your account, there is no going back. Please be certain.
+                            </p>
+                            <button class="btn-danger">Delete Account</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="section" id="products">
+        <div class="section-header">
+            <h2>Featured Products</h2>
+            <p>Discover our best-selling premium headphones</p>
+        </div>
+        
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="wireless">Wireless</button>
+            <button class="filter-btn" data-filter="wired">Wired</button>
+            <button class="filter-btn" data-filter="gaming">Gaming</button>
+            <button class="filter-btn" data-filter="sport">Sport</button>
+        </div>
+
+        <div class="products-grid" id="productsGrid">
+            <!-- Products will be dynamically loaded -->
+        </div>
+    </section>
+
+    <!-- Premium Showcase -->
+    <section class="showcase" id="showcase">
+        <div class="section-header">
+            <h2>Premium Collection</h2>
+            <p>Our flagship models with cutting-edge technology</p>
+        </div>
+        <div class="showcase-grid">
+            <div class="showcase-card">
+                <span class="showcase-badge">PREMIUM</span>
+                <div class="showcase-image">
+                    <img src="etherix_elite_pro.png" alt="Etherix Pro X1">
+                </div>
+                <div class="showcase-info">
+                    <h3>Etherix Pro X1</h3>
+                    <ul class="showcase-features">
+                        <li><i class="fas fa-check"></i> Active Noise Cancellation</li>
+                        <li><i class="fas fa-check"></i> 40-Hour Battery Life</li>
+                        <li><i class="fas fa-check"></i> Hi-Res Audio Certified</li>
+                        <li><i class="fas fa-check"></i> Premium Leather Cushions</li>
+                    </ul>
+                    <div class="product-price">$399.99</div>
+                    <button class="btn-primary" onclick="addToCart('Etherix Pro X1', 399.99, 'etherix_elite_pro.png')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="showcase-card">
+                <span class="showcase-badge">BESTSELLER</span>
+                <div class="showcase-image">
+                    <img src="etherix_wave_z2.png" alt="Etherix Wave Z2">
+                </div>
+                <div class="showcase-info">
+                    <h3>Etherix Wave Z2</h3>
+                    <ul class="showcase-features">
+                        <li><i class="fas fa-check"></i> Spatial Audio Support</li>
+                        <li><i class="fas fa-check"></i> 35-Hour Playtime</li>
+                        <li><i class="fas fa-check"></i> Fast Charging (5min=2hrs)</li>
+                        <li><i class="fas fa-check"></i> Multipoint Connection</li>
+                    </ul>
+                    <div class="product-price">$299.99</div>
+                    <button class="btn-primary" onclick="addToCart('Etherix Wave Z2', 299.99, 'etherix_wave_z2.png')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="showcase-card">
+                <span class="showcase-badge">NEW</span>
+                <div class="showcase-image">
+                    <img src="etherix_sport_s3.png" alt="Etherix Sport S3">
+                </div>
+                <div class="showcase-info">
+                    <h3>Etherix Sport S3</h3>
+                    <ul class="showcase-features">
+                        <li><i class="fas fa-check"></i> IPX7 Water Resistant</li>
+                        <li><i class="fas fa-check"></i> 30-Hour Battery</li>
+                        <li><i class="fas fa-check"></i> Secure Fit Design</li>
+                        <li><i class="fas fa-check"></i> Sweat Proof</li>
+                    </ul>
+                    <div class="product-price">$249.99</div>
+                    <button class="btn-primary" onclick="addToCart('Etherix Sport S3', 249.99, 'etherix_sport_s3.png')">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-header">
+            <h2>What Our Customers Say</h2>
+            <p>Real reviews from real users</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">JD</div>
+                    <div class="testimonial-author">
+                        <h4>John Doe</h4>
+                        <p class="testimonial-role">Music Producer</p>
+                    </div>
+                </div>
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"The sound quality is absolutely incredible. As a music producer, I need precision and these headphones deliver beyond expectations. The noise cancellation is perfect for my studio work."</p>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">SK</div>
+                    <div class="testimonial-author">
+                        <h4>Sarah Kim</h4>
+                        <p class="testimonial-role">Fitness Enthusiast</p>
+                    </div>
+                </div>
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"I use these for my daily workouts and they're amazing! Sweat resistant, secure fit, and the battery lasts all week. Best investment I've made for my fitness routine."</p>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">MP</div>
+                    <div class="testimonial-author">
+                        <h4>Mike Peters</h4>
+                        <p class="testimonial-role">Software Engineer</p>
+                    </div>
+                </div>
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"Perfect for long coding sessions. The comfort is unmatched, and I can wear them for 8+ hours without any discomfort. The multipoint connection is a game changer for switching between devices."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>ETHERIX</h3>
+                <p>Premium audio experiences for the modern listener. Quality you can hear, comfort you can feel.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#showcase">Premium Collection</a></li>
+                    <li><a href="#testimonials">Reviews</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns & Warranty</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Subscribe for exclusive offers and updates</p>
+                <div style="margin-top: 1rem;">
+                    <input type="email" placeholder="Your email" style="padding: 0.7rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(0,102,255,0.2); border-radius: 5px; color: white; width: 100%; margin-bottom: 0.5rem;">
+                    <button class="btn-primary" style="width: 100%;">Subscribe</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Etherix Sounds. All rights reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeCart()">&times;</button>
+            <h2 style="margin-bottom: 2rem;">Shopping Cart</h2>
+            <div id="cartItems"></div>
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="btn-primary" style="width: 100%; margin-top: 1rem;">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="modal" id="authModal">
+        <div class="auth-modal-content">
+            <button class="modal-close" onclick="closeAuthModal()">&times;</button>
+            
+            <div class="auth-header">
+                <h2>Welcome to Etherix</h2>
+                <p>Sign in to unlock exclusive features</p>
+            </div>
+
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
+                <button class="auth-tab" onclick="switchAuthTab('signup')">Sign Up</button>
+            </div>
+
+            <!-- Login Form -->
+            <form class="auth-form active" id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <div class="password-toggle">
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                        <button type="button" class="password-toggle-btn" onclick="togglePassword('loginPassword')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+                <button type="submit" class="auth-submit">Sign In</button>
+            </form>
+
+            <!-- Sign Up Form -->
+            <form class="auth-form" id="signupForm" onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email Address</label>
+                    <input type="email" id="signupEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <div class="password-toggle">
+                        <input type="password" id="signupPassword" placeholder="Create a password" required>
+                        <button type="button" class="password-toggle-btn" onclick="togglePassword('signupPassword')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div class="password-toggle">
+                        <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                        <button type="button" class="password-toggle-btn" onclick="togglePassword('confirmPassword')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="auth-submit">Create Account</button>
+            </form>
+
+            <div class="auth-divider">
+                <span>or continue with</span>
+            </div>
+
+            <div class="social-login">
+                <button class="social-btn" onclick="handleSocialLogin('google')">
+                    <i class="fab fa-google"></i>
+                    <span>Google</span>
+                </button>
+                <button class="social-btn" onclick="handleSocialLogin('facebook')">
+                    <i class="fab fa-facebook-f"></i>
+                    <span>Facebook</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="toast" class="fixed bottom-8 right-8 bg-gray-800 border border-blue-500 px-6 py-3 rounded-lg shadow-xl z-50 hidden"></div>
+    <script src="script.js"></script>
+</body>
+</html>
